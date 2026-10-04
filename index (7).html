@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ClipForge Pro</title>
+  <style>
+    :root{--bg:#0b0d10;--card:#151920;--muted:#9aa4b2;--line:#29313d;--text:#f7f8fa;--accent:#ff7a1a}
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#090b0e,#11151b);font-family:Inter,system-ui,Arial;color:var(--text);min-height:100vh}
+    .wrap{max-width:980px;margin:auto;padding:28px 16px 64px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}
+    .brand{font-size:28px;font-weight:900;letter-spacing:-.8px}.brand span{color:var(--accent)}.badge{border:1px solid var(--line);padding:8px 11px;border-radius:999px;color:var(--muted);font-size:12px}
+    .hero{padding:28px;border:1px solid var(--line);background:rgba(21,25,32,.88);border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+    h1{font-size:clamp(30px,7vw,58px);line-height:.98;letter-spacing:-2px;margin:0 0 14px}.sub{color:var(--muted);max-width:740px;font-size:16px;line-height:1.6}
+    .tabs{display:flex;gap:8px;margin:24px 0 16px}.tab{background:#0f1318;border:1px solid var(--line);color:#cbd3dd;padding:10px 14px;border-radius:12px;cursor:pointer}.tab.active{background:#202733;color:#fff;border-color:#3a4657}
+    .panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.full{grid-column:1/-1}
+    label{display:block;font-size:12px;color:#aeb7c4;margin:0 0 7px}input,select{width:100%;background:#0d1116;border:1px solid var(--line);color:#fff;border-radius:12px;padding:13px 14px;outline:none}
+    input:focus,select:focus{border-color:#637083}.times{display:grid;grid-template-columns:1fr 1fr;gap:12px}.actions{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+    button.primary{border:0;background:var(--accent);color:#111;font-weight:900;padding:13px 18px;border-radius:13px;cursor:pointer}.hint{color:var(--muted);font-size:12px}.status{margin-top:14px;min-height:22px;color:#c7d0da;font-size:13px}
+    .features{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.feature{border:1px solid var(--line);padding:14px;border-radius:15px;background:#10141a}.feature b{display:block;font-size:13px}.feature span{font-size:11px;color:var(--muted)}
+    footer{margin-top:18px;color:#727e8d;font-size:11px;line-height:1.5}@media(max-width:700px){.grid,.features{grid-template-columns:1fr}.full{grid-column:auto}.top{align-items:flex-start}.badge{display:none}.hero{padding:20px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="brand">ClipForge <span>Pro</span></div><div class="badge">Link → Clip → Download</div></div>
+  <section class="hero">
+    <h1>Ambil bagian yang penting.<br>Tak perlu simpan video penuh.</h1>
+    <div class="sub">Potong video dari URL media langsung atau upload file, tentukan IN–OUT, pilih ukuran/resolusi dan rasio, lalu unduh hasil clip.</div>
+
+    <div class="tabs"><button class="tab active" data-tab="url">URL Video</button><button class="tab" data-tab="upload">Upload File</button></div>
+
+    <form id="url" class="panel active">
+      <div class="grid">
+        <div class="full"><label>URL media langsung</label><input name="url" placeholder="https://contoh.com/video.mp4" required></div>
+        <div class="times full"><div><label>IN</label><input name="inTime" value="00:00:00" required></div><div><label>OUT</label><input name="outTime" value="00:00:30" required></div></div>
+        <div><label>Resolusi</label><select name="resolution"><option>360</option><option>480</option><option selected>720</option><option>1080</option></select></div>
+        <div><label>Rasio</label><select name="ratio"><option selected>16:9</option><option>9:16</option><option>1:1</option></select></div>
+        <div><label>Format</label><select name="format"><option value="mp4">MP4 Video</option><option value="mp3">MP3 Audio</option></select></div>
+        <div><label>Target ukuran file (MB, opsional)</label><input name="targetMB" type="number" min="2" step="1" placeholder="mis. 20"></div>
+      </div>
+      <div class="actions"><button class="primary">Potong & Download</button><span class="hint">Server memproses hanya bagian yang diminta bila sumber mendukung seeking/range.</span></div>
+      <div class="status"></div>
+    </form>
+
+    <form id="upload" class="panel" enctype="multipart/form-data">
+      <div class="grid">
+        <div class="full"><label>Pilih file video</label><input name="video" type="file" accept="video/*,audio/*" required></div>
+        <div class="times full"><div><label>IN</label><input name="inTime" value="00:00:00" required></div><div><label>OUT</label><input name="outTime" value="00:00:30" required></div></div>
+        <div><label>Resolusi</label><select name="resolution"><option>360</option><option>480</option><option selected>720</option><option>1080</option></select></div>
+        <div><label>Rasio</label><select name="ratio"><option selected>16:9</option><option>9:16</option><option>1:1</option></select></div>
+        <div><label>Format</label><select name="format"><option value="mp4">MP4 Video</option><option value="mp3">MP3 Audio</option></select></div>
+        <div><label>Target ukuran file (MB, opsional)</label><input name="targetMB" type="number" min="2" step="1" placeholder="mis. 20"></div>
+      </div>
+      <div class="actions"><button class="primary">Potong & Download</button><span class="hint">File upload akan dihapus otomatis setelah proses.</span></div>
+      <div class="status"></div>
+    </form>
+
+    <div class="features"><div class="feature"><b>IN / OUT Presisi</b><span>Format jam:menit:detik</span></div><div class="feature"><b>9:16 Ready</b><span>Untuk Shorts, Reels, TikTok</span></div><div class="feature"><b>Target MB</b><span>Kompresi mendekati ukuran tujuan</span></div><div class="feature"><b>Tanpa Simpan Permanen</b><span>Proses streaming / file sementara</span></div></div>
+    <footer>Gunakan hanya untuk video milik sendiri, video berlisensi, atau konten yang memang Anda punya izin untuk mengunduh dan mengolahnya. Versi MVP ini tidak membypass DRM, login, atau proteksi platform.</footer>
+  </section>
+</div>
+<script>
+  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab,.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active')});
+
+  async function handle(form, endpoint, isUpload){
+    const status=form.querySelector('.status'); const btn=form.querySelector('button.primary');
+    btn.disabled=true; status.textContent='Memproses clip…';
+    try{
+      const options={method:'POST'};
+      if(isUpload){ options.body=new FormData(form); }
+      else { const fd=new FormData(form); options.headers={'Content-Type':'application/json'}; options.body=JSON.stringify(Object.fromEntries(fd.entries())); }
+      const r=await fetch(endpoint,options);
+      if(!r.ok){ const data=await r.json().catch(()=>({error:'Proses gagal'})); throw new Error(data.error||'Proses gagal'); }
+      const blob=await r.blob(); const cd=r.headers.get('content-disposition')||''; const match=cd.match(/filename="([^"]+)"/); const name=match?.[1]||'clipforge.mp4';
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+      status.textContent='Selesai. File hasil sudah dikirim ke perangkat.';
+    }catch(e){ status.textContent='Gagal: '+e.message; }
+    finally{btn.disabled=false;}
+  }
+  document.getElementById('url').addEventListener('submit',e=>{e.preventDefault();handle(e.currentTarget,'/api/clip-url',false)});
+  document.getElementById('upload').addEventListener('submit',e=>{e.preventDefault();handle(e.currentTarget,'/api/clip-upload',true)});
+</script>
+</body>
+</html>
