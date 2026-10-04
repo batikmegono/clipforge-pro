@@ -1,84 +1,131 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ClipForge Pro</title>
-  <style>
-    :root{--bg:#0b0d10;--card:#151920;--muted:#9aa4b2;--line:#29313d;--text:#f7f8fa;--accent:#ff7a1a}
-    *{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#090b0e,#11151b);font-family:Inter,system-ui,Arial;color:var(--text);min-height:100vh}
-    .wrap{max-width:980px;margin:auto;padding:28px 16px 64px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}
-    .brand{font-size:28px;font-weight:900;letter-spacing:-.8px}.brand span{color:var(--accent)}.badge{border:1px solid var(--line);padding:8px 11px;border-radius:999px;color:var(--muted);font-size:12px}
-    .hero{padding:28px;border:1px solid var(--line);background:rgba(21,25,32,.88);border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
-    h1{font-size:clamp(30px,7vw,58px);line-height:.98;letter-spacing:-2px;margin:0 0 14px}.sub{color:var(--muted);max-width:740px;font-size:16px;line-height:1.6}
-    .tabs{display:flex;gap:8px;margin:24px 0 16px}.tab{background:#0f1318;border:1px solid var(--line);color:#cbd3dd;padding:10px 14px;border-radius:12px;cursor:pointer}.tab.active{background:#202733;color:#fff;border-color:#3a4657}
-    .panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.full{grid-column:1/-1}
-    label{display:block;font-size:12px;color:#aeb7c4;margin:0 0 7px}input,select{width:100%;background:#0d1116;border:1px solid var(--line);color:#fff;border-radius:12px;padding:13px 14px;outline:none}
-    input:focus,select:focus{border-color:#637083}.times{display:grid;grid-template-columns:1fr 1fr;gap:12px}.actions{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
-    button.primary{border:0;background:var(--accent);color:#111;font-weight:900;padding:13px 18px;border-radius:13px;cursor:pointer}.hint{color:var(--muted);font-size:12px}.status{margin-top:14px;min-height:22px;color:#c7d0da;font-size:13px}
-    .features{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.feature{border:1px solid var(--line);padding:14px;border-radius:15px;background:#10141a}.feature b{display:block;font-size:13px}.feature span{font-size:11px;color:var(--muted)}
-    footer{margin-top:18px;color:#727e8d;font-size:11px;line-height:1.5}@media(max-width:700px){.grid,.features{grid-template-columns:1fr}.full{grid-column:auto}.top{align-items:flex-start}.badge{display:none}.hero{padding:20px}}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ClipForge Pro</title>
+<style>
+:root{--bg:#0b0d10;--card:#151920;--muted:#9aa4b2;--line:#29313d;--text:#f7f8fa;--accent:#ff7a1a;--blue:#4da3ff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#090b0e,#11151b);font-family:Inter,system-ui,Arial;color:var(--text);min-height:100vh}
+.wrap{max-width:1050px;margin:auto;padding:26px 16px 64px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.brand{font-size:28px;font-weight:900;letter-spacing:-.8px}.brand span{color:var(--accent)}.badge{border:1px solid var(--line);padding:8px 11px;border-radius:999px;color:var(--muted);font-size:12px}
+.hero{padding:26px;border:1px solid var(--line);background:rgba(21,25,32,.9);border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.25)}h1{font-size:clamp(30px,6vw,55px);line-height:1;letter-spacing:-2px;margin:0 0 12px}.sub{color:var(--muted);max-width:780px;line-height:1.55}
+.tabs{display:flex;gap:8px;margin:22px 0 14px}.tab,.ghost{background:#0f1318;border:1px solid var(--line);color:#cbd3dd;padding:10px 14px;border-radius:12px;cursor:pointer}.tab.active{background:#202733;color:#fff;border-color:#3a4657}.panel{display:none}.panel.active{display:block}
+.previewCard{border:1px solid var(--line);background:#090c10;border-radius:18px;padding:14px;margin:16px 0}.screen{width:100%;aspect-ratio:16/9;background:#05070a;border-radius:13px;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#657080}.screen video,.screen iframe,#ytPlayer{width:100%;height:100%;border:0;background:#000}.empty{padding:20px;text-align:center}.empty b{display:block;color:#dce3ec;margin-bottom:5px}.empty span{font-size:12px;color:#7f8a98}
+.previewTools{margin-top:12px}.timelineRow{display:grid;grid-template-columns:70px 1fr 70px;gap:10px;align-items:center}.timelineRow span{font-size:12px;color:#aeb7c4;text-align:center}.timeline{width:100%;accent-color:var(--accent)}.markRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.markBtn{border:1px solid var(--line);background:#121820;color:#fff;padding:10px 12px;border-radius:11px;cursor:pointer}.markBtn.in{border-color:#2b78d0}.markBtn.out{border-color:#d07c2b}.clipInfo{margin-left:auto;color:var(--muted);font-size:12px;display:flex;align-items:center}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.full{grid-column:1/-1}.urlRow{display:grid;grid-template-columns:1fr auto;gap:8px}.times{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;font-size:12px;color:#aeb7c4;margin:0 0 7px}input,select{width:100%;background:#0d1116;border:1px solid var(--line);color:#fff;border-radius:12px;padding:13px 14px;outline:none}input:focus,select:focus{border-color:#637083}
+.actions{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}button.primary{border:0;background:var(--accent);color:#111;font-weight:900;padding:13px 18px;border-radius:13px;cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}.hint{color:var(--muted);font-size:12px}.status{margin-top:14px;min-height:22px;color:#c7d0da;font-size:13px}.warning{border:1px solid #5d4922;background:#231b0d;color:#e9c77b;padding:10px 12px;border-radius:12px;font-size:12px;margin-top:10px;display:none}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px}.feature{border:1px solid var(--line);padding:14px;border-radius:15px;background:#10141a}.feature b{display:block;font-size:13px}.feature span{font-size:11px;color:var(--muted)}footer{margin-top:18px;color:#727e8d;font-size:11px;line-height:1.5}
+@media(max-width:700px){.grid,.features{grid-template-columns:1fr}.full{grid-column:auto}.top{align-items:flex-start}.badge{display:none}.hero{padding:18px}.urlRow{grid-template-columns:1fr}.timelineRow{grid-template-columns:55px 1fr 55px}.clipInfo{width:100%;margin-left:0}}
+</style>
 </head>
 <body>
 <div class="wrap">
-  <div class="top"><div class="brand">ClipForge <span>Pro</span></div><div class="badge">Link → Clip → Download</div></div>
+  <div class="top"><div class="brand">ClipForge <span>Pro</span></div><div class="badge">Preview → Tandai IN/OUT → Clip</div></div>
   <section class="hero">
-    <h1>Ambil bagian yang penting.<br>Tak perlu simpan video penuh.</h1>
-    <div class="sub">Potong video dari URL media langsung atau upload file, tentukan IN–OUT, pilih ukuran/resolusi dan rasio, lalu unduh hasil clip.</div>
+    <h1>Lihat dulu videonya.<br>Baru pilih bagian yang mau dipotong.</h1>
+    <div class="sub">Muat video, putar sampai adegan yang diinginkan, tekan <b>Set IN</b> dan <b>Set OUT</b>, lalu proses hanya bagian tersebut.</div>
 
-    <div class="tabs"><button class="tab active" data-tab="url">URL Video</button><button class="tab" data-tab="upload">Upload File</button></div>
+    <div class="tabs"><button class="tab active" data-tab="url" type="button">URL Video</button><button class="tab" data-tab="upload" type="button">Upload File</button></div>
 
     <form id="url" class="panel active">
       <div class="grid">
-        <div class="full"><label>URL media langsung</label><input name="url" placeholder="https://contoh.com/video.mp4" required></div>
+        <div class="full">
+          <label>URL video</label>
+          <div class="urlRow">
+            <input id="urlInput" name="url" placeholder="https://contoh.com/video.mp4 atau link YouTube" required>
+            <button class="ghost" id="loadUrl" type="button">Muat Preview</button>
+          </div>
+          <div id="ytWarning" class="warning">Preview YouTube bisa ditampilkan, tetapi backend ClipForge saat ini belum memproses URL halaman YouTube untuk download/clip. Tombol proses hanya aktif untuk URL media langsung yang didukung server.</div>
+        </div>
+      </div>
+
+      <div class="previewCard">
+        <div class="screen" id="urlScreen"><div class="empty"><b>Preview video akan muncul di sini</b><span>Tempel URL lalu klik “Muat Preview”.</span></div></div>
+        <div class="previewTools">
+          <div class="timelineRow"><span id="urlNow">00:00:00</span><input id="urlTimeline" class="timeline" type="range" min="0" max="100" value="0" step="0.1"><span id="urlDur">00:00:00</span></div>
+          <div class="markRow"><button type="button" class="markBtn in" data-mark="in" data-mode="url">Set IN dari posisi ini</button><button type="button" class="markBtn out" data-mark="out" data-mode="url">Set OUT dari posisi ini</button><div class="clipInfo">Durasi clip: <b id="urlClipDur" style="margin-left:5px;color:#fff">00:00:30</b></div></div>
+        </div>
+      </div>
+
+      <div class="grid">
         <div class="times full"><div><label>IN</label><input name="inTime" value="00:00:00" required></div><div><label>OUT</label><input name="outTime" value="00:00:30" required></div></div>
         <div><label>Resolusi</label><select name="resolution"><option>360</option><option>480</option><option selected>720</option><option>1080</option></select></div>
         <div><label>Rasio</label><select name="ratio"><option selected>16:9</option><option>9:16</option><option>1:1</option></select></div>
         <div><label>Format</label><select name="format"><option value="mp4">MP4 Video</option><option value="mp3">MP3 Audio</option></select></div>
         <div><label>Target ukuran file (MB, opsional)</label><input name="targetMB" type="number" min="2" step="1" placeholder="mis. 20"></div>
       </div>
-      <div class="actions"><button class="primary">Potong & Download</button><span class="hint">Server memproses hanya bagian yang diminta bila sumber mendukung seeking/range.</span></div>
+      <div class="actions"><button class="primary" id="urlSubmit">Potong & Download</button><span class="hint">Untuk URL media langsung yang diizinkan dan dapat dibaca FFmpeg.</span></div>
       <div class="status"></div>
     </form>
 
     <form id="upload" class="panel" enctype="multipart/form-data">
+      <div class="grid"><div class="full"><label>Pilih file video</label><input id="fileInput" name="video" type="file" accept="video/*,audio/*" required></div></div>
+
+      <div class="previewCard">
+        <div class="screen" id="uploadScreen"><div class="empty"><b>Preview file akan muncul di sini</b><span>Pilih video dari perangkat.</span></div></div>
+        <div class="previewTools">
+          <div class="timelineRow"><span id="uploadNow">00:00:00</span><input id="uploadTimeline" class="timeline" type="range" min="0" max="100" value="0" step="0.1"><span id="uploadDur">00:00:00</span></div>
+          <div class="markRow"><button type="button" class="markBtn in" data-mark="in" data-mode="upload">Set IN dari posisi ini</button><button type="button" class="markBtn out" data-mark="out" data-mode="upload">Set OUT dari posisi ini</button><div class="clipInfo">Durasi clip: <b id="uploadClipDur" style="margin-left:5px;color:#fff">00:00:30</b></div></div>
+        </div>
+      </div>
+
       <div class="grid">
-        <div class="full"><label>Pilih file video</label><input name="video" type="file" accept="video/*,audio/*" required></div>
         <div class="times full"><div><label>IN</label><input name="inTime" value="00:00:00" required></div><div><label>OUT</label><input name="outTime" value="00:00:30" required></div></div>
         <div><label>Resolusi</label><select name="resolution"><option>360</option><option>480</option><option selected>720</option><option>1080</option></select></div>
         <div><label>Rasio</label><select name="ratio"><option selected>16:9</option><option>9:16</option><option>1:1</option></select></div>
         <div><label>Format</label><select name="format"><option value="mp4">MP4 Video</option><option value="mp3">MP3 Audio</option></select></div>
         <div><label>Target ukuran file (MB, opsional)</label><input name="targetMB" type="number" min="2" step="1" placeholder="mis. 20"></div>
       </div>
-      <div class="actions"><button class="primary">Potong & Download</button><span class="hint">File upload akan dihapus otomatis setelah proses.</span></div>
+      <div class="actions"><button class="primary">Potong & Download</button><span class="hint">File upload dihapus otomatis setelah proses.</span></div>
       <div class="status"></div>
     </form>
 
-    <div class="features"><div class="feature"><b>IN / OUT Presisi</b><span>Format jam:menit:detik</span></div><div class="feature"><b>9:16 Ready</b><span>Untuk Shorts, Reels, TikTok</span></div><div class="feature"><b>Target MB</b><span>Kompresi mendekati ukuran tujuan</span></div><div class="feature"><b>Tanpa Simpan Permanen</b><span>Proses streaming / file sementara</span></div></div>
-    <footer>Gunakan hanya untuk video milik sendiri, video berlisensi, atau konten yang memang Anda punya izin untuk mengunduh dan mengolahnya. Versi MVP ini tidak membypass DRM, login, atau proteksi platform.</footer>
+    <div class="features"><div class="feature"><b>Preview Sebelum Clip</b><span>Lihat adegan yang akan dipotong</span></div><div class="feature"><b>Set IN / OUT</b><span>Ambil waktu dari posisi player</span></div><div class="feature"><b>9:16 Ready</b><span>Shorts, Reels, TikTok</span></div><div class="feature"><b>Target MB</b><span>Kompresi mendekati ukuran tujuan</span></div></div>
+    <footer>Gunakan hanya untuk video milik sendiri, video berlisensi, atau konten yang Anda punya izin untuk mengunduh dan mengolahnya. ClipForge tidak membypass DRM, login, atau proteksi platform.</footer>
   </section>
 </div>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-  document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab,.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active')});
+let urlVideo=null, uploadVideo=null, uploadObjectUrl=null, ytPlayer=null, ytReady=false, urlMode='none', ytPendingId=null;
 
-  async function handle(form, endpoint, isUpload){
-    const status=form.querySelector('.status'); const btn=form.querySelector('button.primary');
-    btn.disabled=true; status.textContent='Memproses clip…';
-    try{
-      const options={method:'POST'};
-      if(isUpload){ options.body=new FormData(form); }
-      else { const fd=new FormData(form); options.headers={'Content-Type':'application/json'}; options.body=JSON.stringify(Object.fromEntries(fd.entries())); }
-      const r=await fetch(endpoint,options);
-      if(!r.ok){ const data=await r.json().catch(()=>({error:'Proses gagal'})); throw new Error(data.error||'Proses gagal'); }
-      const blob=await r.blob(); const cd=r.headers.get('content-disposition')||''; const match=cd.match(/filename="([^"]+)"/); const name=match?.[1]||'clipforge.mp4';
-      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),5000);
-      status.textContent='Selesai. File hasil sudah dikirim ke perangkat.';
-    }catch(e){ status.textContent='Gagal: '+e.message; }
-    finally{btn.disabled=false;}
-  }
-  document.getElementById('url').addEventListener('submit',e=>{e.preventDefault();handle(e.currentTarget,'/api/clip-url',false)});
-  document.getElementById('upload').addEventListener('submit',e=>{e.preventDefault();handle(e.currentTarget,'/api/clip-upload',true)});
+const pad=n=>String(Math.floor(n)).padStart(2,'0');
+function fmt(sec){sec=Math.max(0,Number(sec)||0);const h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=Math.floor(sec%60);return `${pad(h)}:${pad(m)}:${pad(s)}`}
+function parseTime(v){const p=String(v||'0').split(':').map(Number);if(p.some(Number.isNaN))return 0;return p.reduce((a,b)=>a*60+b,0)}
+function youtubeId(url){try{const u=new URL(url);if(u.hostname.includes('youtu.be'))return u.pathname.split('/').filter(Boolean)[0]||null;if(u.hostname.includes('youtube.com')){if(u.searchParams.get('v'))return u.searchParams.get('v');const parts=u.pathname.split('/').filter(Boolean);if(['shorts','embed','live'].includes(parts[0]))return parts[1]||null}}catch{}return null}
+function looksDirectMedia(url){return /\.(mp4|webm|mov|m4v|m3u8|mp3|m4a|aac|ogg)(\?|#|$)/i.test(url)}
+
+function setScreen(mode,html){document.getElementById(mode+'Screen').innerHTML=html}
+function formOf(mode){return document.getElementById(mode)}
+function updateClipDuration(mode){const f=formOf(mode),a=parseTime(f.inTime.value),b=parseTime(f.outTime.value);document.getElementById(mode+'ClipDur').textContent=fmt(Math.max(0,b-a))}
+['url','upload'].forEach(mode=>{const f=formOf(mode);f.inTime.addEventListener('input',()=>updateClipDuration(mode));f.outTime.addEventListener('input',()=>updateClipDuration(mode))});
+
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab,.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active')});
+
+function wireVideo(video,mode){const tl=document.getElementById(mode+'Timeline'),now=document.getElementById(mode+'Now'),dur=document.getElementById(mode+'Dur');
+  video.addEventListener('loadedmetadata',()=>{tl.max=video.duration||0;dur.textContent=fmt(video.duration);if(parseTime(formOf(mode).outTime.value)>video.duration)formOf(mode).outTime.value=fmt(video.duration);updateClipDuration(mode)});
+  video.addEventListener('timeupdate',()=>{tl.value=video.currentTime||0;now.textContent=fmt(video.currentTime)});
+  tl.oninput=()=>{video.currentTime=Number(tl.value)||0;now.textContent=fmt(video.currentTime)};
+}
+
+function currentTime(mode){if(mode==='upload'&&uploadVideo)return uploadVideo.currentTime||0;if(mode==='url'){if(urlMode==='video'&&urlVideo)return urlVideo.currentTime||0;if(urlMode==='youtube'&&ytPlayer&&ytReady)return ytPlayer.getCurrentTime()||0}return 0}
+
+document.querySelectorAll('.markBtn').forEach(btn=>btn.onclick=()=>{const mode=btn.dataset.mode,mark=btn.dataset.mark,f=formOf(mode),t=currentTime(mode);if(mark==='in')f.inTime.value=fmt(t);else f.outTime.value=fmt(t);updateClipDuration(mode)});
+
+function makeUrlVideo(url){urlMode='video';document.getElementById('ytWarning').style.display='none';setScreen('url','<video id="urlVideo" controls playsinline></video>');urlVideo=document.getElementById('urlVideo');urlVideo.src=url;urlVideo.load();wireVideo(urlVideo,'url');}
+function makeYoutube(id){urlMode='youtube';document.getElementById('ytWarning').style.display='block';setScreen('url','<div id="ytPlayer"></div>');ytPendingId=id;document.getElementById('urlSubmit').disabled=true;createYTPlayer();}
+function createYTPlayer(){if(!window.YT||!YT.Player||!ytPendingId)return;ytReady=false;ytPlayer=new YT.Player('ytPlayer',{videoId:ytPendingId,playerVars:{playsinline:1,rel:0},events:{onReady:e=>{ytReady=true;const d=e.target.getDuration()||0;const tl=document.getElementById('urlTimeline');tl.max=d;document.getElementById('urlDur').textContent=fmt(d);if(parseTime(formOf('url').outTime.value)>d)formOf('url').outTime.value=fmt(d);updateClipDuration('url')},onStateChange:()=>{}}});}
+window.onYouTubeIframeAPIReady=()=>createYTPlayer();
+setInterval(()=>{if(urlMode==='youtube'&&ytPlayer&&ytReady){const t=ytPlayer.getCurrentTime()||0,d=ytPlayer.getDuration()||0;const tl=document.getElementById('urlTimeline');tl.max=d;tl.value=t;document.getElementById('urlNow').textContent=fmt(t);document.getElementById('urlDur').textContent=fmt(d)}},250);
+document.getElementById('urlTimeline').addEventListener('input',e=>{if(urlMode==='youtube'&&ytPlayer&&ytReady)ytPlayer.seekTo(Number(e.target.value)||0,true)});
+
+document.getElementById('loadUrl').onclick=()=>{const url=document.getElementById('urlInput').value.trim();if(!url)return;const id=youtubeId(url);document.getElementById('urlSubmit').disabled=false;if(id){makeYoutube(id);return}makeUrlVideo(url)};
+
+document.getElementById('fileInput').addEventListener('change',e=>{const file=e.target.files?.[0];if(!file)return;if(uploadObjectUrl)URL.revokeObjectURL(uploadObjectUrl);uploadObjectUrl=URL.createObjectURL(file);setScreen('upload','<video id="uploadVideo" controls playsinline></video>');uploadVideo=document.getElementById('uploadVideo');uploadVideo.src=uploadObjectUrl;uploadVideo.load();wireVideo(uploadVideo,'upload')});
+
+async function handle(form,endpoint,isUpload){const status=form.querySelector('.status'),btn=form.querySelector('button.primary');btn.disabled=true;status.textContent='Memproses clip…';try{const options={method:'POST'};if(isUpload)options.body=new FormData(form);else{const fd=new FormData(form);options.headers={'Content-Type':'application/json'};options.body=JSON.stringify(Object.fromEntries(fd.entries()))}const r=await fetch(endpoint,options);if(!r.ok){const data=await r.json().catch(()=>({error:'Proses gagal'}));throw new Error(data.error||'Proses gagal')}const blob=await r.blob(),cd=r.headers.get('content-disposition')||'',match=cd.match(/filename="([^"]+)"/),name=match?.[1]||'clipforge.mp4';const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();const href=a.href;a.remove();setTimeout(()=>URL.revokeObjectURL(href),5000);status.textContent='Selesai. File hasil sudah dikirim ke perangkat.'}catch(e){status.textContent='Gagal: '+e.message}finally{btn.disabled=false;if(form.id==='url'&&urlMode==='youtube')btn.disabled=true}}
+
+document.getElementById('url').addEventListener('submit',e=>{e.preventDefault();if(urlMode==='youtube'){e.currentTarget.querySelector('.status').textContent='Link YouTube saat ini hanya untuk preview. Backend belum memproses URL halaman YouTube.';return}handle(e.currentTarget,'/api/clip-url',false)});
+document.getElementById('upload').addEventListener('submit',e=>{e.preventDefault();handle(e.currentTarget,'/api/clip-upload',true)});
 </script>
 </body>
 </html>
